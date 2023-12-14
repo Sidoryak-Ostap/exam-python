@@ -134,8 +134,17 @@ class Project(Info):
         member_name = input("Enter member name: ")
         self.team = [(name, role) for name, role in self.team if name != member_name]
 
+
+class ManagerSingleton(ProjectManager):
+    _instance = None
+
+    def __new__(cls):
+        if not cls._instance:
+            cls._instance = super().__new__(cls)
+        return cls._instance
+
 # Example usage:
-manager = ProjectManager()
+manager = ManagerSingleton()
 
 while True:
     try:
